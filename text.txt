@@ -1,0 +1,14 @@
+1. Initialize the Project
+Open your terminal in VS Code and run these commands:
+
+    Bash
+    mkdir payment-system
+    cd payment-system
+    npm init -y
+    npm install express razorpay pg dotenv cors
+    npm install --save-dev nodemon
+
+razorpay: The official SDK to talk to their API.
+pg: The PostgreSQL client.
+dotenv: To keep your API keys secret.
+nodemon: Restarts your server automatically when you save code.

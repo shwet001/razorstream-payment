@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><title>Razorpay Test</title></head>
+<body>
+    <button id="pay-button">Pay ₹500</button>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        document.getElementById('pay-button').onclick = async function() {
+            // 1. Create order on your backend
+            const response = await fetch('/api/payments/create-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: 500, currency: 'INR', userId: 1 })
+            });
+            const order = await response.json();
+
+            // 2. Open Razorpay Popup
+            const options = {
+                "key": "rzp_test_SLJc5kjrJZXAvr", // Your Key ID
+                "amount": order.amount,
+                "order_id": order.id,
+                "handler": function (response) {
+                    alert("Payment Success! ID: " + response.razorpay_payment_id);
+                }
+            };
+            const rzp = new Razorpay(options);
+            rzp.open();
+        };
+    </script>
+</body>
+</html>
